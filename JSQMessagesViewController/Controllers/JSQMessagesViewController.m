@@ -150,9 +150,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     [self jsq_updateCollectionViewInsets];
     
+    UICollectionView *collectview = self.collectionView;
+    UIPanGestureRecognizer *panGestureRecognizer = collectview.panGestureRecognizer;
     self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView
                                                                           contextView:self.view
-                                                                 panGestureRecognizer:self.collectionView.panGestureRecognizer
+                                                                 panGestureRecognizer:panGestureRecognizer
                                                                              delegate:self];
 }
 
@@ -696,6 +698,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         return;
     }
     
+    //为什么先取消,然后再添加这个 观察者呢?这是为什么???
+    //经过试验,如果在这里不取消的话,那么会一直重复进这个,直到crash.所以才在这里先取消,然后,再添加!这是这个通知的通用写法!
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIMenuControllerWillShowMenuNotification
                                                   object:nil];

@@ -139,18 +139,23 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 }
 
 - (void)jsq_addObservers
-{
+{//为什么要这么麻烦,为什么不直接
+   // [self.contentView.leftBarButtonItem addTarget:self
+  //                                         action:@selector(jsq_leftBarButtonPressed:)
+  //                               forControlEvents:UIControlEventTouchUpInside];
+    //反而用观察者偶来添加?
     if (self.jsq_isObserving) {
         return;
     }
-    
+    NSString *path = NSStringFromSelector(@selector(leftBarButtonItem));
     [self.contentView addObserver:self
-                       forKeyPath:NSStringFromSelector(@selector(leftBarButtonItem))
+                       forKeyPath:path
                           options:0
                           context:kJSQMessagesInputToolbarKeyValueObservingContext];
     
+    NSString *path1 = NSStringFromSelector(@selector(rightBarButtonItem));
     [self.contentView addObserver:self
-                       forKeyPath:NSStringFromSelector(@selector(rightBarButtonItem))
+                       forKeyPath:path1
                           options:0
                           context:kJSQMessagesInputToolbarKeyValueObservingContext];
     

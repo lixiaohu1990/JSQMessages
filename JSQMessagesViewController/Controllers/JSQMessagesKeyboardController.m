@@ -236,6 +236,8 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
                           delay:0.0
                         options:animationCurveOption
                      animations:^{
+                         //我们这里的动画,和键盘弹出的frame的动画是一样的速度的,这样可以实现随着键盘的平缓出现,我们的视图,平缓出现的功能!!
+                         //我么以前没这么用过,在动画里,通知别的地方,改变某些东西,也算是一种参考吧
                          [self jsq_notifyKeyboardFrameNotificationForFrame:keyboardEndFrameConverted];
                      }
                      completion:^(BOOL finished) {

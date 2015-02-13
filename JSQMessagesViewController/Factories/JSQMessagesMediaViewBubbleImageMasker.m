@@ -52,7 +52,7 @@
 
 - (void)applyOutgoingBubbleImageMaskToMediaView:(UIView *)mediaView
 {
-    JSQMessagesBubbleImage *bubbleImageData = [self.bubbleImageFactory outgoingMessagesBubbleImageWithColor:[UIColor whiteColor]];
+    JSQMessagesBubbleImage *bubbleImageData = [self.bubbleImageFactory outgoingMessagesBubbleImageWithColor:[UIColor colorWithRed:1.000 green:0.209 blue:0.363 alpha:1.000]];
     [self jsq_maskView:mediaView withImage:[bubbleImageData messageBubbleImage]];
 }
 
